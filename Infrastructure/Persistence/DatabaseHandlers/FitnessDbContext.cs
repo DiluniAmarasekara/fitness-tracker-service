@@ -5,11 +5,8 @@ using System.Globalization;
 using System.Threading.Tasks;
 using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Domain.Models;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
-using Microsoft.CodeAnalysis.Elfie.Model;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
 {

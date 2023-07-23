@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\fitness-tracker-service.props" />
+</Project>

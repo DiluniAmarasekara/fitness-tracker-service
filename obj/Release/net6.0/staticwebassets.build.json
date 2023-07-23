@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "+OsEaEErWS0jdRpzaEDkF2qY89oVmCEai4bHEdQbXEc=",
+  "Source": "fitness-tracker-service",
+  "BasePath": "_content/fitness-tracker-service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
-    "anonymousAuthentication": true,
+    "anonymousAuthentication": false,
     "iisExpress": {
       "applicationUrl": "http://localhost:52716",
       "sslPort": 44329
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "fitness_tracker_service": {
+    "fitness-tracker-service": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",
