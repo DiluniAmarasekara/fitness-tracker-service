@@ -18,6 +18,7 @@ using fitness_tracker_service.Infrastructure.Persistence.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
 using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Application.Dtos;
+using fitness_tracker_service.Application.Commands;
 
 namespace fitness_tracker_service
 {
@@ -44,6 +45,7 @@ namespace fitness_tracker_service
             {
                 config.CreateMap<Goal, GoalDto>();
                 config.CreateMap<WorkoutSchedule, WorkoutDto>();
+                config.CreateMap<CreateUpdateDeleteWorkoutCommand, WorkoutSchedule>();
                 config.CreateMap<Exercise, ExerciseDto>();
                 config.CreateMap<Cheatmeal, CheatmealDto>();
             });

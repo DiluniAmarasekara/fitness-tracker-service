@@ -15,7 +15,6 @@ namespace fitness_tracker_service.Application.QueryHandlers
         private readonly IWorkoutRepository _workoutRepository;
         private readonly IMapper _mapper;
 
-
         public GetWorkoutByIdHandler(IWorkoutRepository workoutRepository, IMapper mapper)
         {
             _workoutRepository = workoutRepository;

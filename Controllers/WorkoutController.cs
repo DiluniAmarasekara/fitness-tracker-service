@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -41,5 +42,25 @@ namespace fitness_tracker_service.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateUpdateDeleteWorkoutCommand workout)
+        {
+            var result = await _mediator.Send(workout);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] CreateUpdateDeleteWorkoutCommand workout)
+        {
+            var result = await _mediator.Send(workout);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new CreateUpdateDeleteWorkoutCommand(id));
+            return Ok(result);
+        }
     }
 }

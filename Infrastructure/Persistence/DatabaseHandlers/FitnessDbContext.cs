@@ -4,9 +4,11 @@ using System.Data;
 using System.Globalization;
 using System.Threading.Tasks;
 using fitness_tracker_service.Domain.Models;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.CodeAnalysis.Elfie.Model;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
 {
@@ -19,12 +21,47 @@ namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
         {
             _configuration = configuration;
             cn = new SqlConnection(_configuration.GetConnectionString("FitnessCon").ToString());
+            cn.Open();
         }
 
-        internal Task<List<Cheatmeal>> findAllCheatmeals()
+        internal void deleteWorkout(long workoutId)
+        {
+            deleteAllWorkoutExercise(workoutId);
+            findAllCheatmealsByWorkoutIdOpt(workoutId).GetAwaiter().GetResult().ForEach(cheatMeal => {
+                delete(cheatMeal.cheatId);
+            });
+            SqlCommand cmd = new SqlCommand("delete from workout where workout_id=@workout_id", cn);
+            cmd.Parameters.AddWithValue("workout_id", workoutId);
+            cmd.ExecuteNonQuery();
+        }
+
+        private void delete(long cheatId)
+        {
+            SqlCommand cmd = new SqlCommand("delete from cheat_meal where cheat_id=@cheat_id", cn);
+            cmd.Parameters.AddWithValue("cheat_id", cheatId);
+            cmd.ExecuteNonQuery();
+        }
+
+        private void deleteAllWorkoutExercise(long workoutId)
+        {
+            SqlCommand cmd = new SqlCommand("delete from workout_exercise where workout_id=@workout_id", cn);
+            cmd.Parameters.AddWithValue("workout_id", workoutId);
+            cmd.ExecuteNonQuery();
+        }
+
+        internal Task<List<Cheatmeal>> findAllCheatmealsByWorkoutIdOpt(long workoutId)
         {
             List<Cheatmeal> cheatmeals = new List<Cheatmeal>();
-            SqlCommand cmd = new SqlCommand("select * from cheat_meal", cn);
+            SqlCommand cmd;
+            if (workoutId==0.0)
+            {
+                cmd = new SqlCommand("select * from cheat_meal", cn);
+                
+            }
+            else {
+                cmd = new SqlCommand("select * from cheat_meal where workout_id=@workout_id", cn);
+                cmd.Parameters.AddWithValue("workout_id", workoutId);
+            }
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -148,6 +185,44 @@ namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
             {
                 return Task.FromResult<WorkoutSchedule>(null);
             }
+        }
+
+        internal void save(WorkoutSchedule workout)
+        {
+            SqlCommand cmd = new SqlCommand("insert into workout values(@from_date, @to_date, @workout_name, @goal_id)", cn);
+            cmd.Parameters.AddWithValue("from_date", workout.fromDate);
+            cmd.Parameters.AddWithValue("to_date", workout.toDate);
+            cmd.Parameters.AddWithValue("workout_name", workout.workoutName);
+            cmd.Parameters.AddWithValue("goal_id", workout.goalId);
+            cmd.ExecuteNonQuery();
+        }
+
+        internal void saveAll(List<WorkoutExercise> exercises)
+        {
+            exercises.ForEach((ex) =>
+            {
+                SqlCommand cmd = new SqlCommand("insert into workout_exercise values(@workout_id, @exercise_id)", cn);
+                cmd.Parameters.AddWithValue("exercise_id", ex.exerciseId);
+                cmd.Parameters.AddWithValue("workout_id", ex.workoutId);
+                cmd.ExecuteNonQuery();
+            });
+        }
+
+        internal void update(WorkoutSchedule workoutSchedule)
+        {
+            SqlCommand cmd = new SqlCommand("update workout set from_date=@from_date, to_date=@to_date, workout_name=@workout_name, goal_id=@goal_id where workout_id=@workout_id", cn);
+            cmd.Parameters.AddWithValue("from_date", workoutSchedule.fromDate);
+            cmd.Parameters.AddWithValue("to_date", workoutSchedule.toDate);
+            cmd.Parameters.AddWithValue("workout_name", workoutSchedule.workoutName);
+            cmd.Parameters.AddWithValue("goal_id", workoutSchedule.goalId);
+            cmd.Parameters.AddWithValue("workout_id", workoutSchedule.workoutId);
+            cmd.ExecuteNonQuery();
+        }
+
+        internal void updateAll(long workoutId, List<WorkoutExercise> workoutExercises)
+        {
+            deleteAllWorkoutExercise(workoutId);
+            saveAll(workoutExercises);
         }
     }
 }

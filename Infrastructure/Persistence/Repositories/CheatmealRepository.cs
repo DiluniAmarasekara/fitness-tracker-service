@@ -16,7 +16,7 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
         }
         public Task<List<Cheatmeal>> GetAllCheatmeals()
         {
-            return _dbContext.findAllCheatmeals();
+            return _dbContext.findAllCheatmealsByWorkoutIdOpt((long)0.0);
         }
         public Task<Cheatmeal> GetCheatmealById(int cheatmealId)
         {

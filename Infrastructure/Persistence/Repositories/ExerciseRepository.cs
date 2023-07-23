@@ -24,5 +24,15 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
         {
             return _dbContext.findAllExerciseByWorkoutId(workoutId);
         }
+
+        public void saveAll(List<WorkoutExercise> workoutExercises)
+        {
+           _dbContext.saveAll(workoutExercises);
+        }
+
+        public void updateAll(long workoutId, List<WorkoutExercise> workoutExercises)
+        {
+            _dbContext.updateAll(workoutId, workoutExercises);
+        }
     }
 }
