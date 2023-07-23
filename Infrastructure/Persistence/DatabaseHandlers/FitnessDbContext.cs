@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Threading.Tasks;
+using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Domain.Models;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.CodeAnalysis.Elfie.Model;
@@ -28,14 +29,14 @@ namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
         {
             deleteAllWorkoutExercise(workoutId);
             findAllCheatmealsByWorkoutIdOpt(workoutId).GetAwaiter().GetResult().ForEach(cheatMeal => {
-                delete(cheatMeal.cheatId);
+                deleteCheatmeal(cheatMeal.cheatId);
             });
             SqlCommand cmd = new SqlCommand("delete from workout where workout_id=@workout_id", cn);
             cmd.Parameters.AddWithValue("workout_id", workoutId);
             cmd.ExecuteNonQuery();
         }
 
-        private void delete(long cheatId)
+        internal void deleteCheatmeal(long cheatId)
         {
             SqlCommand cmd = new SqlCommand("delete from cheat_meal where cheat_id=@cheat_id", cn);
             cmd.Parameters.AddWithValue("cheat_id", cheatId);
@@ -223,6 +224,26 @@ namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
         {
             deleteAllWorkoutExercise(workoutId);
             saveAll(workoutExercises);
+        }
+
+        internal void update(Cheatmeal cheatmeal)
+        {
+            SqlCommand cmd = new SqlCommand("update cheat_meal set date_of_cheat=@date_of_cheat, meal=@meal, " +
+                "workout_id=@workout_id where cheat_id=@cheat_id", cn);
+            cmd.Parameters.AddWithValue("date_of_cheat", cheatmeal.dateOfCheat);
+            cmd.Parameters.AddWithValue("meal", cheatmeal.calories);
+            cmd.Parameters.AddWithValue("workout_id", cheatmeal.workoutId);
+            cmd.Parameters.AddWithValue("cheat_id", cheatmeal.cheatId);
+            cmd.ExecuteNonQuery();
+        }
+
+        internal void save(Cheatmeal cheatmeal)
+        {
+            SqlCommand cmd = new SqlCommand("insert into cheat_meal values(@date_of_cheat, @meal, @workout_id)", cn);
+            cmd.Parameters.AddWithValue("date_of_cheat", cheatmeal.dateOfCheat);
+            cmd.Parameters.AddWithValue("meal", cheatmeal.calories);
+            cmd.Parameters.AddWithValue("workout_id", cheatmeal.workoutId);
+            cmd.ExecuteNonQuery();
         }
     }
 }

@@ -14,6 +14,12 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public void delete(long cheatId)
+        {
+            _dbContext.deleteCheatmeal(cheatId);
+        }
+
         public Task<List<Cheatmeal>> GetAllCheatmeals()
         {
             return _dbContext.findAllCheatmealsByWorkoutIdOpt((long)0.0);
@@ -21,6 +27,16 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
         public Task<Cheatmeal> GetCheatmealById(int cheatmealId)
         {
             return _dbContext.findCheatmealById(cheatmealId);
+        }
+
+        public void save(Cheatmeal cheatmeal)
+        {
+            _dbContext.save(cheatmeal);
+        }
+
+        public void update(Cheatmeal cheatmeal)
+        {
+            _dbContext.update(cheatmeal);
         }
     }
 }
