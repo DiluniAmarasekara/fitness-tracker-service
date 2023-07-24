@@ -1,15 +1,10 @@
-﻿using fitness_tracker_service.Domain.Models;
+﻿using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace fitness_tracker_service.Domain.Repositories
 {
-    public interface ICheatmealRepository
+    public interface ICheatmealRepository : IRepositoryBase<Cheatmeal>
     {
-        void delete(long cheatId);
-        Task<List<Cheatmeal>> GetAllCheatmeals();
-        Task<Cheatmeal> GetCheatmealById(int cheatmealId);
-        void save(Cheatmeal cheatmeal);
-        void update(Cheatmeal cheatmeal);
     }
 }

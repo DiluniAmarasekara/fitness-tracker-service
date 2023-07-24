@@ -5,22 +5,29 @@ namespace fitness_tracker_service.Application.Commands
 {
     public class CreateUpdateDeleteCheatmealCommand : IRequest<string>
     {
-        public long cheatId { get; set; }
-        public DateTime dateOfCheat { get; set; }
-        public string calories { get; set; }
-        public long workoutId { get; set; }
+        public long cheat_id { get; set; }
+
+        public DateTime date_of_cheat { get; set; }
+
+        public string meal { get; set; }
+
+        public long workout_id { get; set; }
 
         public CreateUpdateDeleteCheatmealCommand(long cheatId, DateTime dateOfCheat, string calories, long workoutId)
         {
-            this.cheatId = cheatId;
-            this.dateOfCheat = dateOfCheat;
-            this.calories = calories;
-            this.workoutId = workoutId;
+            this.cheat_id = cheatId;
+            this.date_of_cheat = dateOfCheat;
+            this.meal = calories;
+            this.workout_id = workoutId;
         }
 
         public CreateUpdateDeleteCheatmealCommand(long cheatId)
         {
-            cheatId = cheatId;
+            cheat_id = cheatId;
+        }
+
+        public CreateUpdateDeleteCheatmealCommand()
+        {
         }
     }
 }

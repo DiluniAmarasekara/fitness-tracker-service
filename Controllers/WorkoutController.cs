@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Queries;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,12 +47,13 @@ namespace fitness_tracker_service.Controllers
         public async Task<IActionResult> Post([FromBody] CreateUpdateDeleteWorkoutCommand workout)
         {
             var result = await _mediator.Send(workout);
-            return Ok(result);
+            return Created(workout.workout_name, result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] CreateUpdateDeleteWorkoutCommand workout)
+        public async Task<IActionResult> Put(int id, [FromBody] CreateUpdateDeleteWorkoutCommand workout)
         {
+            workout.workout_id = id;
             var result = await _mediator.Send(workout);
             return Ok(result);
         }

@@ -46,12 +46,13 @@ namespace fitness_tracker_service.Controllers
         public async Task<IActionResult> Post([FromBody] CreateUpdateDeleteCheatmealCommand cheatmeal)
         {
             var result = await _mediator.Send(cheatmeal);
-            return Ok(result);
+            return Created(cheatmeal.date_of_cheat.ToString(), result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] CreateUpdateDeleteCheatmealCommand cheatmeal)
+        public async Task<IActionResult> Put(int id, [FromBody] CreateUpdateDeleteCheatmealCommand cheatmeal)
         {
+            cheatmeal.cheat_id = id;
             var result = await _mediator.Send(cheatmeal);
             return Ok(result);
         }

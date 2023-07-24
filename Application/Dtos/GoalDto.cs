@@ -4,23 +4,27 @@ namespace fitness_tracker_service.Application.Dtos
 {
     public class GoalDto
     {
-        public Int64 goalId { get; set; }
-        public String purpose { get; set; }
+        public long goal_id { get; set; }
+        public string purpose { get; set; }
         public int age { get; set; }
-        public Double currentHeight { get; set; }
-        public Double currentWeight { get; set; }
-        public Double bmi { get; set; }
-        public Double goalWeight { get; set; }
+        public double current_height { get; set; }
+        public double current_weight { get; set; }
+        public double bmi { get; set; }
+        public double goal_weight { get; set; }
+
+        public GoalDto()
+        {
+        }
 
         public GoalDto(Int64 goalId, String purpose, int age, Double currentHeight, Double currentWeight, Double bmi, Double goalWeight)
         {
-            this.goalId = goalId;
+            this.goal_id = goalId;
             this.purpose = purpose;
             this.age = age;
-            this.currentHeight = currentHeight;
-            this.currentWeight = currentWeight;
+            this.current_height = currentHeight;
+            this.current_weight = currentWeight;
             this.bmi = bmi;
-            this.goalWeight = goalWeight;
+            this.goal_weight = goalWeight;
         }
     }
 }

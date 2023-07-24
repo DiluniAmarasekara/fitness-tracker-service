@@ -1,5 +1,4 @@
 ﻿using fitness_tracker_service.Application.Dtos;
-using fitness_tracker_service.Domain.Models;
 using MediatR;
 using System;
 using System.Collections.Generic;

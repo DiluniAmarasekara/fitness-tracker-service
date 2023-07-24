@@ -2,33 +2,32 @@
 using Azure;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Dtos;
-using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using MediatR;
 
 namespace fitness_tracker_service.Application.CommandHandlers
 {
     public class DeleteteWorkoutCommandHandler : IRequestHandler<CreateUpdateDeleteWorkoutCommand, string>
     {
-        private readonly IWorkoutRepository _workoutRepository;
-        private readonly IExerciseRepository _exerciseRepository;
+        private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
 
-        public DeleteteWorkoutCommandHandler(IWorkoutRepository workoutRepository, IExerciseRepository exerciseRepository, IMapper mapper)
+        public DeleteteWorkoutCommandHandler(IRepositoryWrapper repository, IMapper mapper)
         {
-            _workoutRepository = workoutRepository;
-            _exerciseRepository = exerciseRepository;
+            _repository = repository;
             _mapper = mapper;
         }
 
         public async Task<string> Handle(CreateUpdateDeleteWorkoutCommand request, CancellationToken cancellationToken)
         {
-            WorkoutSchedule workout = _workoutRepository.GetWorkoutById((int)request.workoutId).GetAwaiter().GetResult();
+            Workout workout = _repository.Workout.FindByCondition(x => x.workout_id.Equals(request.workout_id)).FirstOrDefault();
             if (workout != null)
             {
                 try
                 {
-                    _workoutRepository.delete(request.workoutId);
+                    //Diluni
+                    _repository.Workout.Delete(workout);
                     return await Task.FromResult("Workout has been successfully deleted!");
                 }
                 catch (Exception ex)

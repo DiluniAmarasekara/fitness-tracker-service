@@ -16,9 +16,11 @@ using AutoMapper;
 using fitness_tracker_service.Domain.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
-using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Application.Commands;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
+using fitness_tracker_service.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace fitness_tracker_service
 {
@@ -34,18 +36,26 @@ namespace fitness_tracker_service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.ConfigureSqlServerContext(Configuration);
+            services.ConfigureRepositoryWrapper();
+
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
             services.AddScoped<IGoalRepository, GoalRepository>();
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<ICheatmealRepository, CheatmealRepository>();
-            services.AddScoped<FitnessDbContext>();
+            services.AddScoped<RepositoryContext>();
+            //services.AddDbContext<RepositoryContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("FitnessCon")));
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
+            
             var mappingConfig = new MapperConfiguration(config =>
             {
                 config.CreateMap<Goal, GoalDto>();
-                config.CreateMap<WorkoutSchedule, WorkoutDto>();
-                config.CreateMap<CreateUpdateDeleteWorkoutCommand, WorkoutSchedule>();
+                config.CreateMap<Workout, WorkoutDto>();
+                config.CreateMap<CreateUpdateDeleteWorkoutCommand, Workout>();
+                config.CreateMap<CreateUpdateDeleteCheatmealCommand, Cheatmeal>();
                 config.CreateMap<Exercise, ExerciseDto>();
                 config.CreateMap<Cheatmeal, CheatmealDto>();
             });

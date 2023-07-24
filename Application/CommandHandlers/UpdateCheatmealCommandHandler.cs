@@ -2,36 +2,35 @@
 using Azure;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Dtos;
-using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
+using fitness_tracker_service.Infrastructure.Persistence.Repositories;
 using MediatR;
 
 namespace fitness_tracker_service.Application.CommandHandlers
 {
     public class UpdateCheatmealCommandHandler : IRequestHandler<CreateUpdateDeleteCheatmealCommand, string>
     {
-        private readonly ICheatmealRepository _cheatmealRepository;
-        private readonly IWorkoutRepository _workoutRepository;
+        private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
 
-        public UpdateCheatmealCommandHandler(ICheatmealRepository cheatmealRepository, IWorkoutRepository workoutRepository, IMapper mapper)
+        public UpdateCheatmealCommandHandler(IRepositoryWrapper repository, IMapper mapper)
         {
-            _cheatmealRepository = cheatmealRepository;
-            _workoutRepository = workoutRepository;
+            _repository = repository;
             _mapper = mapper;
         }
 
         public async Task<string> Handle(CreateUpdateDeleteCheatmealCommand request, CancellationToken cancellationToken)
         {
-            WorkoutSchedule workout = _workoutRepository.GetWorkoutById((int)request.workoutId).GetAwaiter().GetResult();
-            Cheatmeal cheatmeal = _cheatmealRepository.GetCheatmealById((int)request.cheatId).GetAwaiter().GetResult();
+            Workout workout = _repository.Workout.FindByCondition(x => x.workout_id.Equals(request.workout_id)).FirstOrDefault();
+            Cheatmeal cheatmeal = _repository.Cheatmeal.FindByCondition(x => x.cheat_id.Equals(request.cheat_id)).FirstOrDefault();
             if (workout != null)
             {
                 if (cheatmeal != null)
                 {
                     try
                     {
-                        _cheatmealRepository.update(_mapper.Map<Cheatmeal>(request));
+                        _repository.Cheatmeal.Update(_mapper.Map<Cheatmeal>(request));
                         return await Task.FromResult("Cheatmeal has been successfully updated!");
                     }
                     catch (Exception ex)

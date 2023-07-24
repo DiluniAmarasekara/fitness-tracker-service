@@ -4,33 +4,34 @@ using System.Threading.Tasks;
 using AutoMapper;
 using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Application.Queries;
-using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using MediatR;
 
 namespace fitness_tracker_service.Application.QueryHandlers
 {
     public class GetExercisesByWorkoutIdHandler : IRequestHandler<GetExercisesByWorkoutIdQuery, List<ExerciseDto>>
     {
-        private readonly IExerciseRepository _exerciseRepository;
+        private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
 
-        public GetExercisesByWorkoutIdHandler(IExerciseRepository exerciseRepository, IMapper mapper)
+        public GetExercisesByWorkoutIdHandler(IRepositoryWrapper repository, IMapper mapper)
         {
-            _exerciseRepository = exerciseRepository;
+            _repository = repository;
             _mapper = mapper;
         }
 
         public async Task<List<ExerciseDto>> Handle(GetExercisesByWorkoutIdQuery request, CancellationToken cancellationToken)
         {
             List<ExerciseDto> responses = new List<ExerciseDto>();
-            List<Exercise> exercises = await _exerciseRepository.GetAllExerciseByWorkoutId(request._workoutId);
+            //diluni
+            //List<Exercise> exercises = _exerciseRepository.GetAllExerciseByWorkoutId(request._workoutId);
 
-            exercises.ForEach(exercise =>
-            {
-                var response = _mapper.Map<ExerciseDto>(exercise);
-                responses.Add(response);
-            });
+            // exercises.ForEach(exercise =>
+            //{
+            //      var response = _mapper.Map<ExerciseDto>(exercise);
+            //  responses.Add(response);
+            // });
             return responses;
         }
     }

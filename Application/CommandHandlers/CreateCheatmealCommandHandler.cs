@@ -2,33 +2,31 @@
 using Azure;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Dtos;
-using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using MediatR;
 
 namespace fitness_tracker_service.Application.CommandHandlers
 {
     public class CreateCheatmealCommandHandler : IRequestHandler<CreateUpdateDeleteCheatmealCommand, string>
     {
-        private readonly ICheatmealRepository _cheatmealRepository;
-        private readonly IWorkoutRepository _workoutRepository;
+        private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
 
-        public CreateCheatmealCommandHandler(ICheatmealRepository cheatmealRepository, IWorkoutRepository workoutRepository, IMapper mapper)
+        public CreateCheatmealCommandHandler(IRepositoryWrapper repository, IMapper mapper)
         {
-            _cheatmealRepository = cheatmealRepository;
-            _workoutRepository = workoutRepository;
+            _repository = repository;
             _mapper = mapper;
         }
 
         public async Task<string> Handle(CreateUpdateDeleteCheatmealCommand request, CancellationToken cancellationToken)
         {
-            WorkoutSchedule workout = _workoutRepository.GetWorkoutById((int)request.workoutId).GetAwaiter().GetResult();
+            Workout workout = _repository.Workout.FindByCondition(x => x.workout_id.Equals(request.workout_id)).FirstOrDefault();
             if (workout != null)
             {
                 try
                 {
-                    _cheatmealRepository.save(_mapper.Map<Cheatmeal>(request));
+                    _repository.Cheatmeal.Create(_mapper.Map<Cheatmeal>(request));
                     return await Task.FromResult("Cheatmeal has been successfully created!");
                 }
                 catch (Exception ex)
