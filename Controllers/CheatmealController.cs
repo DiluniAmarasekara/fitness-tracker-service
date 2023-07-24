@@ -43,14 +43,14 @@ namespace fitness_tracker_service.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateUpdateDeleteCheatmealCommand cheatmeal)
+        public async Task<IActionResult> Post([FromBody] CreateCheatmealCommand cheatmeal)
         {
             var result = await _mediator.Send(cheatmeal);
             return Created(cheatmeal.date_of_cheat.ToString(), result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(int id, [FromBody] CreateUpdateDeleteCheatmealCommand cheatmeal)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateCheatmealCommand cheatmeal)
         {
             cheatmeal.cheat_id = id;
             var result = await _mediator.Send(cheatmeal);
@@ -60,7 +60,7 @@ namespace fitness_tracker_service.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _mediator.Send(new CreateUpdateDeleteCheatmealCommand(id));
+            var result = await _mediator.Send(new DeleteCheatmealCommand(id));
             return Ok(result);
         }
 

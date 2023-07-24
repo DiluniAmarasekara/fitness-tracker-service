@@ -3,7 +3,7 @@ using MediatR;
 
 namespace fitness_tracker_service.Application.Commands
 {
-    public class CreateUpdateDeleteWorkoutCommand : IRequest<string>
+    public class UpdateWorkoutCommand : IRequest<string>
     {
         public long workout_id { get; set; }
 
@@ -17,7 +17,7 @@ namespace fitness_tracker_service.Application.Commands
 
         public List<ExerciseDto> exercises { get; set; }
 
-        public CreateUpdateDeleteWorkoutCommand(long workoutId, string workoutName, DateTime fromDate, DateTime toDate, long goalId)
+        public UpdateWorkoutCommand(long workoutId, string workoutName, DateTime fromDate, DateTime toDate, long goalId)
         {
             this.workout_id = workoutId;
             this.workout_name = workoutName;
@@ -26,12 +26,12 @@ namespace fitness_tracker_service.Application.Commands
             this.goal_id = goalId;
         }
 
-        public CreateUpdateDeleteWorkoutCommand(long workoutId)
+        public UpdateWorkoutCommand(long workoutId)
         {
             workout_id = workoutId;
         }
 
-        public CreateUpdateDeleteWorkoutCommand()
+        public UpdateWorkoutCommand()
         {
         }
     }

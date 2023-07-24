@@ -8,7 +8,7 @@ using MediatR;
 
 namespace fitness_tracker_service.Application.CommandHandlers
 {
-    public class CreateCheatmealCommandHandler : IRequestHandler<CreateUpdateDeleteCheatmealCommand, string>
+    public class CreateCheatmealCommandHandler : IRequestHandler<CreateCheatmealCommand, string>
     {
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace fitness_tracker_service.Application.CommandHandlers
             _mapper = mapper;
         }
 
-        public async Task<string> Handle(CreateUpdateDeleteCheatmealCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateCheatmealCommand request, CancellationToken cancellationToken)
         {
             Workout workout = _repository.Workout.FindByCondition(x => x.workout_id.Equals(request.workout_id)).FirstOrDefault();
             if (workout != null)

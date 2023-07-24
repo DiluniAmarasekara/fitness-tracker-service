@@ -8,7 +8,7 @@ using MediatR;
 
 namespace fitness_tracker_service.Application.CommandHandlers
 {
-    public class UpdateWorkoutCommandHandler : IRequestHandler<CreateUpdateDeleteWorkoutCommand, string>
+    public class UpdateWorkoutCommandHandler : IRequestHandler<UpdateWorkoutCommand, string>
     {
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace fitness_tracker_service.Application.CommandHandlers
             _mapper = mapper;
         }
 
-        public async Task<string> Handle(CreateUpdateDeleteWorkoutCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateWorkoutCommand request, CancellationToken cancellationToken)
         {
             // Diluni
             //  WorkoutSchedule workout = _workoutRepository.GetWorkoutById((int)request.workoutId).GetAwaiter().GetResult();

@@ -45,8 +45,6 @@ namespace fitness_tracker_service
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<ICheatmealRepository, CheatmealRepository>();
             services.AddScoped<RepositoryContext>();
-            //services.AddDbContext<RepositoryContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("FitnessCon")));
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
             
@@ -54,8 +52,10 @@ namespace fitness_tracker_service
             {
                 config.CreateMap<Goal, GoalDto>();
                 config.CreateMap<Workout, WorkoutDto>();
-                config.CreateMap<CreateUpdateDeleteWorkoutCommand, Workout>();
-                config.CreateMap<CreateUpdateDeleteCheatmealCommand, Cheatmeal>();
+                config.CreateMap<CreateWorkoutCommand, Workout>();
+                config.CreateMap<UpdateWorkoutCommand, Workout>();
+                config.CreateMap<CreateCheatmealCommand, Cheatmeal>();
+                config.CreateMap<UpdateCheatmealCommand, Cheatmeal>();
                 config.CreateMap<Exercise, ExerciseDto>();
                 config.CreateMap<Cheatmeal, CheatmealDto>();
             });

@@ -44,14 +44,14 @@ namespace fitness_tracker_service.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateUpdateDeleteWorkoutCommand workout)
+        public async Task<IActionResult> Post([FromBody] CreateWorkoutCommand workout)
         {
             var result = await _mediator.Send(workout);
             return Created(workout.workout_name, result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(int id, [FromBody] CreateUpdateDeleteWorkoutCommand workout)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateWorkoutCommand workout)
         {
             workout.workout_id = id;
             var result = await _mediator.Send(workout);
@@ -61,7 +61,7 @@ namespace fitness_tracker_service.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _mediator.Send(new CreateUpdateDeleteWorkoutCommand(id));
+            var result = await _mediator.Send(new DeleteWorkoutCommand(id));
             return Ok(result);
         }
     }

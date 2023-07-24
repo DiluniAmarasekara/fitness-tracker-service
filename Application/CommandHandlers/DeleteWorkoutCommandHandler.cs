@@ -8,7 +8,7 @@ using MediatR;
 
 namespace fitness_tracker_service.Application.CommandHandlers
 {
-    public class DeleteteWorkoutCommandHandler : IRequestHandler<CreateUpdateDeleteWorkoutCommand, string>
+    public class DeleteteWorkoutCommandHandler : IRequestHandler<DeleteWorkoutCommand, string>
     {
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace fitness_tracker_service.Application.CommandHandlers
             _mapper = mapper;
         }
 
-        public async Task<string> Handle(CreateUpdateDeleteWorkoutCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteWorkoutCommand request, CancellationToken cancellationToken)
         {
             Workout workout = _repository.Workout.FindByCondition(x => x.workout_id.Equals(request.workout_id)).FirstOrDefault();
             if (workout != null)
