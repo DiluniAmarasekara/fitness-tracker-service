@@ -1,10 +1,8 @@
-﻿using fitness_tracker_service.Application.Commands;
-using fitness_tracker_service.Application.Dtos;
-using fitness_tracker_service.Application.Queries;
+﻿using fitness_tracker_service.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace fitness_tracker_service.Controllers
+namespace fitness_tracker_service.WebApi
 {
     [Route("api/Report")]
     [ApiController]

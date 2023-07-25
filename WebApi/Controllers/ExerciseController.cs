@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using fitness_tracker_service.Application.Commands;
+﻿using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace fitness_tracker_service.Controllers
+namespace fitness_tracker_service.WebApi
 {
     [Route("api/Exercise")]
     [ApiController]
