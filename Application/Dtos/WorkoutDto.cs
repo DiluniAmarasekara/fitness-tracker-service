@@ -18,14 +18,5 @@ namespace fitness_tracker_service.Application.Dtos
         public WorkoutDto()
         {
         }
-
-        public WorkoutDto(long workoutId, string workoutName, DateTime fromDate, DateTime toDate, long goalId)
-        {
-            this.workout_id = workoutId;
-            this.workout_name = workoutName;
-            this.from_date = fromDate;
-            this.to_date = toDate;
-            this.goal_id = goalId;
-        }
     }
 }

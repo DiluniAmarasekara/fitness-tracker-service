@@ -14,6 +14,7 @@ namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
         public DbSet<Exercise>? Exercises { get; set; }
         public DbSet<Cheatmeal>? Cheatmeals { get; set; }
         public DbSet<WorkoutExercise>? WorkoutExercises { get; set; }
+        public DbSet<Weight>? Weights { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +23,7 @@ namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
             modelBuilder.Entity<Exercise>().HasKey(x => x.exercise_id);
             modelBuilder.Entity<Cheatmeal>().HasKey(x => x.cheat_id);
             modelBuilder.Entity<WorkoutExercise>().HasKey(x => new { x.workout_id, x.exercise_id });
+            modelBuilder.Entity<Weight>().HasKey(x => x.weight_id);
         }
     }
 }

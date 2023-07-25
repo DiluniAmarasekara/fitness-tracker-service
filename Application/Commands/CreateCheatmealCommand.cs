@@ -13,14 +13,6 @@ namespace fitness_tracker_service.Application.Commands
 
         public long workout_id { get; set; }
 
-        public CreateCheatmealCommand(long cheatId, DateTime dateOfCheat, string calories, long workoutId)
-        {
-            this.cheat_id = cheatId;
-            this.date_of_cheat = dateOfCheat;
-            this.meal = calories;
-            this.workout_id = workoutId;
-        }
-
         public CreateCheatmealCommand(long cheatId)
         {
             cheat_id = cheatId;

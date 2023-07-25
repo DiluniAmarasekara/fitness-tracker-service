@@ -15,16 +15,5 @@ namespace fitness_tracker_service.Application.Dtos
         public GoalDto()
         {
         }
-
-        public GoalDto(Int64 goalId, String purpose, int age, Double currentHeight, Double currentWeight, Double bmi, Double goalWeight)
-        {
-            this.goal_id = goalId;
-            this.purpose = purpose;
-            this.age = age;
-            this.current_height = currentHeight;
-            this.current_weight = currentWeight;
-            this.bmi = bmi;
-            this.goal_weight = goalWeight;
-        }
     }
 }

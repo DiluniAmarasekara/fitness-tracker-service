@@ -8,6 +8,7 @@ namespace fitness_tracker_service.Domain.Repositories
         Task<bool> delete(Cheatmeal cheatmeal);
         Task<bool> deleteAllByWorkoutId(List<Cheatmeal> cheatmeals);
         Task<List<CheatmealTo>> getAll();
+        Task<List<CheatmealTo>> getAllByDateRange(DateTime from_date, DateTime to_date);
         Task<List<CheatmealTo>> getAllByWorkoutId(long workoutId);
         Task<CheatmealTo> getById(long cheatmealId);
         Task<bool> modify(Cheatmeal cheatmeal);

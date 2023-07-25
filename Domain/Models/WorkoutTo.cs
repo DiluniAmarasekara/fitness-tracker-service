@@ -7,5 +7,9 @@
         public DateTime from_date { get; set; }
         public DateTime to_date { get; set; }
         public long goal_id { get; set; }
+
+        public WorkoutTo()
+        {
+        }
     }
 }

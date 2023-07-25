@@ -38,7 +38,7 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
 
         public Task<WorkoutTo> getById(long workout_id)
         {
-            Workout workout=FindByCondition(x => x.workout_id.Equals(workout_id)).FirstOrDefault();
+            Workout workout = FindByCondition(x => x.workout_id.Equals(workout_id)).FirstOrDefault();
             return Task.FromResult(_mapper.Map<WorkoutTo>(workout));
         }
 
@@ -66,6 +66,12 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
             {
                 return Task.FromResult(false);
             }
+        }
+
+        public Task<List<WorkoutTo>> getAllByDateRange(DateTime from_date, DateTime to_date)
+        {
+            IEnumerable<Workout> workouts = FindByCondition(x => x.from_date >= from_date && x.to_date <= to_date).ToList();
+            return Task.FromResult(_mapper.Map<List<WorkoutTo>>(workouts.ToList()));
         }
     }
 }

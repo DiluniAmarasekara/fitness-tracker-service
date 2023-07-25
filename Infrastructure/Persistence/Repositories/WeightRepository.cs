@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Azure.Core;
-using fitness_tracker_service.Application.Dtos;
+using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
@@ -9,33 +8,32 @@ using System.Threading.Tasks;
 
 namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
 {
-    public class GoalRepository : RepositoryBase<Goal>, IGoalRepository
+    public class WeightRepository : RepositoryBase<Weight>, IWeightRepository
     {
         private readonly IMapper _mapper;
-
-        public GoalRepository(RepositoryContext repositoryContext, IMapper mapper)
+        public WeightRepository(RepositoryContext repositoryContext, IMapper mapper)
             : base(repositoryContext)
         {
             _mapper = mapper;
         }
 
-        public Task<GoalTo> getById(long goalId)
-        {
-            Goal goal = FindByCondition(x => x.goal_id.Equals(goalId)).FirstOrDefault();
-            return Task.FromResult(_mapper.Map<GoalTo>(goal));
-        }
-
-        public Task<bool> modify(Goal goal)
+        public Task<bool> add(Weight weight)
         {
             try
             {
-                Update(goal);
+                Create(weight);
                 return Task.FromResult(true);
             }
             catch (Exception ex)
             {
                 return Task.FromResult(false);
             }
+        }
+
+        public Task<List<WeightTo>> getAllByDateRange(DateTime from_date, DateTime to_date)
+        {
+            IEnumerable<Weight> weights = FindByCondition(x => x.log_date >= from_date && x.log_date <= to_date).ToList();
+            return Task.FromResult(_mapper.Map<List<WeightTo>>(weights.ToList()));
         }
     }
 }

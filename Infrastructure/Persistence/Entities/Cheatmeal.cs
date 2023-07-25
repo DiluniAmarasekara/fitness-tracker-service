@@ -11,5 +11,9 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Entities
         public DateTime date_of_cheat { get; set; }
         public string meal { get; set; }
         public long workout_id { get; set; }
+        public Cheatmeal()
+        {
+            
+        }
     }
 }

@@ -13,5 +13,9 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Entities
         public double current_weight { get; set; }
         public double bmi { get; set; }
         public double goal_weight { get; set; }
+        public Goal()
+        {
+            
+        }
     }
 }

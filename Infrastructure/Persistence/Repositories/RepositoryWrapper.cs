@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using fitness_tracker_service.Domain.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
 
 namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
 {
@@ -13,6 +14,7 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
         private ICheatmealRepository _cheatmeal;
         private IExerciseRepository _exercise;
         private IWorkoutExerciseRepository _workoutExercise;
+        private IWeightRepository _weight;
         public IWorkoutRepository Workout
         {
             get
@@ -70,6 +72,18 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
                     _workoutExercise = new WorkoutExerciseRepository(_repoContext, _mapper);
                 }
                 return _workoutExercise;
+            }
+        }
+
+        public IWeightRepository Weight
+        {
+            get
+            {
+                if (_weight == null)
+                {
+                    _weight = new WeightRepository(_repoContext, _mapper);
+                }
+                return _weight;
             }
         }
 

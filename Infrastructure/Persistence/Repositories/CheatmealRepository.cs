@@ -65,6 +65,12 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
             return Task.FromResult(_mapper.Map<List<CheatmealTo>>(cheatmeals.ToList()));
         }
 
+        public Task<List<CheatmealTo>> getAllByDateRange(DateTime from_date, DateTime to_date)
+        {
+            IEnumerable<Cheatmeal> cheatmeals = FindByCondition(x => x.date_of_cheat >= from_date && x.date_of_cheat <= to_date).ToList();
+            return Task.FromResult(_mapper.Map<List<CheatmealTo>>(cheatmeals.ToList()));
+        }
+
         public Task<List<CheatmealTo>> getAllByWorkoutId(long workoutId)
         {
             IEnumerable<Cheatmeal> cheatmeals = FindByCondition(x => x.workout_id.Equals(workoutId)).ToList();

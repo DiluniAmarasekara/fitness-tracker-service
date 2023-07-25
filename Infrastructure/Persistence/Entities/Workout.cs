@@ -16,5 +16,9 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Entities
 
         [Required(ErrorMessage = "Goal ID is required")]
         public long goal_id { get; set; }
+        public Workout()
+        {
+            
+        }
     }
 }

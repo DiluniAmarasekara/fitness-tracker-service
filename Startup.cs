@@ -8,6 +8,8 @@ using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using fitness_tracker_service.Infrastructure.Services;
+using fitness_tracker_service.Domain.Models;
+using System.ComponentModel;
 
 namespace fitness_tracker_service
 {
@@ -32,7 +34,10 @@ namespace fitness_tracker_service
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<ICheatmealRepository, CheatmealRepository>();
             services.AddScoped<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
+            services.AddScoped<IWeightRepository, WeightRepository>();
+
             services.AddScoped<RepositoryContext>();
+
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
             
@@ -58,9 +63,12 @@ namespace fitness_tracker_service
 
                 config.CreateMap<GoalTo, GoalDto>();
                 config.CreateMap<Goal, GoalTo>();
+                config.CreateMap<GoalTo, Goal>();
 
                 config.CreateMap<WorkoutExercise, WorkoutExerciseTo>();
                 config.CreateMap<WorkoutExerciseTo, WorkoutExercise>();
+
+                config.CreateMap<WeightTo, Weight>();
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
