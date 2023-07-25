@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using fitness_tracker_service.Application.Commands;
+﻿using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Queries;
-using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace fitness_tracker_service.Controllers
 {
@@ -36,7 +29,7 @@ namespace fitness_tracker_service.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("Weight")]
         public async Task<IActionResult> post(long goal_id, double today_weight)
         {
             var result = await _mediator.Send(new LogTodayWeightCommand(goal_id, today_weight));

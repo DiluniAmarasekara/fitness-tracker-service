@@ -3,8 +3,6 @@ using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
 {
@@ -28,6 +26,12 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
             {
                 return Task.FromResult(false);
             }
+        }
+
+        public Task<List<WeightTo>> getAll()
+        {
+            IEnumerable<Weight> weights = FindAll().ToList();
+            return Task.FromResult(_mapper.Map<List<WeightTo>>(weights.ToList()));
         }
 
         public Task<List<WeightTo>> getAllByDateRange(DateTime from_date, DateTime to_date)

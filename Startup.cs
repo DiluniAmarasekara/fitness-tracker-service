@@ -9,7 +9,6 @@ using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using fitness_tracker_service.Infrastructure.Services;
 using fitness_tracker_service.Domain.Models;
-using System.ComponentModel;
 
 namespace fitness_tracker_service
 {

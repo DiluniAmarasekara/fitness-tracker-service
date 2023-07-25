@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace fitness_tracker_service.Application.Dtos
+﻿namespace fitness_tracker_service.Application.Dtos
 {
     public enum ReportType
     {
