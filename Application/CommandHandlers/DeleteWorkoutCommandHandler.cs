@@ -5,6 +5,7 @@ using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Domain.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using MediatR;
+using System.Collections.Generic;
 
 namespace fitness_tracker_service.Application.CommandHandlers
 {
@@ -26,7 +27,16 @@ namespace fitness_tracker_service.Application.CommandHandlers
             {
                 try
                 {
-                    //Diluni
+                    List<WorkoutExercise> workoutExercises = _repository.WorkoutExercise.FindByCondition(x => x.workout_id.Equals(request.workout_id)).ToList();
+                    workoutExercises.ForEach(exsistExercise =>
+                    {
+                        _repository.WorkoutExercise.Delete(exsistExercise);
+                    });
+                    List<Cheatmeal> cheatmeals = _repository.Cheatmeal.FindByCondition(x => x.workout_id.Equals(request.workout_id)).ToList();
+                    cheatmeals.ForEach(exsistCheatmeal =>
+                    {
+                        _repository.Cheatmeal.Delete(exsistCheatmeal);
+                    });
                     _repository.Workout.Delete(workout);
                     return await Task.FromResult("Workout has been successfully deleted!");
                 }

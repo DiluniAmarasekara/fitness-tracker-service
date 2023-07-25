@@ -24,7 +24,6 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
         }
         public void Update(T entity)
         {
-            //RepositoryContext.Entry(entity).State = EntityState.Modified;
             RepositoryContext.Set<T>().Update(entity);
             RepositoryContext.SaveChanges();
         }

@@ -44,6 +44,7 @@ namespace fitness_tracker_service
             services.AddScoped<IGoalRepository, GoalRepository>();
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<ICheatmealRepository, CheatmealRepository>();
+            services.AddScoped<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
             services.AddScoped<RepositoryContext>();
             services.AddControllers();
             services.AddMediatR(typeof(Startup));

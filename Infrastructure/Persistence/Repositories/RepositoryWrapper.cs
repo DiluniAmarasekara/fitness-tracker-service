@@ -10,6 +10,7 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
         private IGoalRepository _goal;
         private ICheatmealRepository _cheatmeal;
         private IExerciseRepository _exercise;
+        private IWorkoutExerciseRepository _workoutExercise;
         public IWorkoutRepository Workout
         {
             get
@@ -55,6 +56,18 @@ namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
                     _exercise = new ExerciseRepository(_repoContext);
                 }
                 return _exercise;
+            }
+        }
+
+        public IWorkoutExerciseRepository WorkoutExercise
+        {
+            get
+            {
+                if (_workoutExercise == null)
+                {
+                    _workoutExercise = new WorkoutExerciseRepository(_repoContext);
+                }
+                return _workoutExercise;
             }
         }
 

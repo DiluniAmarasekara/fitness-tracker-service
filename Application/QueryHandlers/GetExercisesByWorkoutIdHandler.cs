@@ -24,14 +24,13 @@ namespace fitness_tracker_service.Application.QueryHandlers
         public async Task<List<ExerciseDto>> Handle(GetExercisesByWorkoutIdQuery request, CancellationToken cancellationToken)
         {
             List<ExerciseDto> responses = new List<ExerciseDto>();
-            //diluni
-            //List<Exercise> exercises = _exerciseRepository.GetAllExerciseByWorkoutId(request._workoutId);
-
-            // exercises.ForEach(exercise =>
-            //{
-            //      var response = _mapper.Map<ExerciseDto>(exercise);
-            //  responses.Add(response);
-            // });
+            List<WorkoutExercise> workoutExercises = _repository.WorkoutExercise.FindByCondition(x => x.workout_id.Equals(request._workoutId)).ToList();
+            workoutExercises.ForEach(exercise =>
+            {
+                Exercise exerciseDetail = _repository.Exercise.FindByCondition(x=>x.exercise_id.Equals(exercise.exercise_id)).FirstOrDefault();
+                var response = _mapper.Map<ExerciseDto>(exerciseDetail);
+                responses.Add(response);
+            });
             return responses;
         }
     }

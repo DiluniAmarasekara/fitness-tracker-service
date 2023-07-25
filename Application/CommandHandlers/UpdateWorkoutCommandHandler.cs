@@ -21,32 +21,34 @@ namespace fitness_tracker_service.Application.CommandHandlers
 
         public async Task<string> Handle(UpdateWorkoutCommand request, CancellationToken cancellationToken)
         {
-            // Diluni
-            //  WorkoutSchedule workout = _workoutRepository.GetWorkoutById((int)request.workoutId).GetAwaiter().GetResult();
-            //    if (workout != null)
-            // {
+             Workout workout = _repository.Workout.FindByCondition(x=>x.workout_id.Equals(request.workout_id)).FirstOrDefault();
+             if (workout != null)
+             {
             try
             {
-                //       _workoutRepository.update(_mapper.Map<WorkoutSchedule>(request));
+                    if (request.exercises.Count > 0)
+                    {
+                        List<WorkoutExercise> workoutExercises = _repository.WorkoutExercise.FindByCondition(x => x.workout_id.Equals(request.workout_id)).ToList();
+                        workoutExercises.ForEach(exsistExercise =>
+                        {
+                            _repository.WorkoutExercise.Delete(exsistExercise);
+                        });
 
-                //         if (request.exercises.Count > 0)
-                // {
-                // List<DomWorkoutExercise> workoutExercises = new List<DomWorkoutExercise>();
-                //  request.exercises.ForEach(exercise =>
-                //  {
-                // DomWorkoutExercise workoutExercise = new DomWorkoutExercise(exercise.exerciseId, request.workoutId);
-                // workoutExercises.Add(workoutExercise);
-                // });
-                // _exerciseRepository.updateAll(workout.workoutId, workoutExercises);
-                // }
-                return await Task.FromResult("Workout has been successfully updated!");
+                        request.exercises.ForEach(exercise =>
+                        {
+                            WorkoutExercise workoutExercise = new WorkoutExercise(exercise.exercise_id, request.workout_id);
+                            _repository.WorkoutExercise.Create(workoutExercise);
+                        });
+                    }
+                    _repository.Workout.Update(_mapper.Map<Workout>(request));
+                    return await Task.FromResult("Workout has been successfully updated!");
                 }
                 catch (Exception ex)
                 {
                     return await Task.FromResult(ex.Message);
                 }
-            // }
-            // else return await Task.FromResult("Update workout has been failled! Workout is not exist!");
+            }
+           else return await Task.FromResult("Update workout has been failled! Workout is not exist!");
         }
     }
 }

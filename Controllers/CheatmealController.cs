@@ -63,6 +63,5 @@ namespace fitness_tracker_service.Controllers
             var result = await _mediator.Send(new DeleteCheatmealCommand(id));
             return Ok(result);
         }
-
     }
 }

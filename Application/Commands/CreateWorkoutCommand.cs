@@ -15,8 +15,6 @@ namespace fitness_tracker_service.Application.Commands
 
         public long goal_id { get; set; }
 
-        public List<ExerciseDto> exercises { get; set; }
-
         public CreateWorkoutCommand(long workoutId, string workoutName, DateTime fromDate, DateTime toDate, long goalId)
         {
             this.workout_id = workoutId;

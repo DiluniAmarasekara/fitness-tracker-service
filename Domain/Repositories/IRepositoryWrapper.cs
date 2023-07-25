@@ -6,6 +6,7 @@
         IGoalRepository Goal { get; }
         ICheatmealRepository Cheatmeal { get; }
         IExerciseRepository Exercise { get; }
+        IWorkoutExerciseRepository WorkoutExercise { get; }
         void Save();
     }
 }

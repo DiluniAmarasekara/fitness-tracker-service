@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +39,13 @@ namespace fitness_tracker_service.Controllers
             {
                 return NotFound();
             }
+            return Ok(result);
+        }
+
+        [HttpPost("{workoutId}", Name = "AddExercisesForWorkout")]
+        public async Task<IActionResult> Post([FromBody] CreateWorkoutExerciseCommand workoutExercise)
+        {
+            var result = await _mediator.Send(workoutExercise);
             return Ok(result);
         }
 
