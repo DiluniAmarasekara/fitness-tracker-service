@@ -9,9 +9,9 @@ namespace fitness_tracker_service.Application.Queries
 {
     public class GetExercisesByWorkoutIdQuery : IRequest<List<ExerciseDto>>
     {
-        public int _workoutId { get; set; }
+        public long _workoutId { get; set; }
 
-        public GetExercisesByWorkoutIdQuery(int workoutId)
+        public GetExercisesByWorkoutIdQuery(long workoutId)
         {
             _workoutId = workoutId;
         }

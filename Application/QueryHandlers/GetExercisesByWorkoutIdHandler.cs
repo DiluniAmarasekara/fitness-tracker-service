@@ -6,29 +6,32 @@ using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Application.Queries;
 using fitness_tracker_service.Domain.Repositories;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
+using fitness_tracker_service.Infrastructure.Persistence.Repositories;
 using MediatR;
 
 namespace fitness_tracker_service.Application.QueryHandlers
 {
     public class GetExercisesByWorkoutIdHandler : IRequestHandler<GetExercisesByWorkoutIdQuery, List<ExerciseDto>>
     {
-        private readonly IRepositoryWrapper _repository;
+        private readonly IExerciseRepository _exerciseRepository;
+        private readonly IWorkoutExerciseRepository _workoutExerciseRepository;
         private readonly IMapper _mapper;
 
-        public GetExercisesByWorkoutIdHandler(IRepositoryWrapper repository, IMapper mapper)
+        public GetExercisesByWorkoutIdHandler(IExerciseRepository exerciseRepository, IWorkoutExerciseRepository workoutExerciseRepository, IMapper mapper)
         {
-            _repository = repository;
+            _exerciseRepository = exerciseRepository;
+            _workoutExerciseRepository = workoutExerciseRepository;
             _mapper = mapper;
         }
 
         public async Task<List<ExerciseDto>> Handle(GetExercisesByWorkoutIdQuery request, CancellationToken cancellationToken)
         {
-            List<ExerciseDto> responses = new List<ExerciseDto>();
-            List<WorkoutExercise> workoutExercises = _repository.WorkoutExercise.FindByCondition(x => x.workout_id.Equals(request._workoutId)).ToList();
-            workoutExercises.ForEach(exercise =>
+            List<ExerciseDto> responses=new List<ExerciseDto>();
+            List<WorkoutExerciseTo> workoutExercises = await _workoutExerciseRepository.getAllByWorkoutId(request._workoutId);
+            workoutExercises.ForEach(async exercise =>
             {
-                Exercise exerciseDetail = _repository.Exercise.FindByCondition(x=>x.exercise_id.Equals(exercise.exercise_id)).FirstOrDefault();
-                var response = _mapper.Map<ExerciseDto>(exerciseDetail);
+                ExerciseTo exerciseTo = await _exerciseRepository.getById(exercise.exercise_id);
+                var response = _mapper.Map<ExerciseDto>(exerciseTo);
                 responses.Add(response);
             });
             return responses;

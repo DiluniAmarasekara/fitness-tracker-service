@@ -1,16 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
 using fitness_tracker_service.Domain.Repositories;
@@ -20,7 +8,6 @@ using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using fitness_tracker_service.Infrastructure.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace fitness_tracker_service
 {
@@ -51,14 +38,29 @@ namespace fitness_tracker_service
             
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<Goal, GoalDto>();
-                config.CreateMap<Workout, WorkoutDto>();
                 config.CreateMap<CreateWorkoutCommand, Workout>();
                 config.CreateMap<UpdateWorkoutCommand, Workout>();
                 config.CreateMap<CreateCheatmealCommand, Cheatmeal>();
                 config.CreateMap<UpdateCheatmealCommand, Cheatmeal>();
-                config.CreateMap<Exercise, ExerciseDto>();
-                config.CreateMap<Cheatmeal, CheatmealDto>();
+
+                config.CreateMap<ExerciseTo, ExerciseDto>();
+                config.CreateMap<Exercise, ExerciseTo>();
+                config.CreateMap<ExerciseTo, Exercise>();
+                config.CreateMap<ExerciseDto, Exercise>();
+
+                config.CreateMap<CheatmealTo, CheatmealDto>();
+                config.CreateMap<Cheatmeal, CheatmealTo>();
+                config.CreateMap<CheatmealTo, Cheatmeal>();
+
+                config.CreateMap<WorkoutTo, WorkoutDto>();
+                config.CreateMap<Workout, WorkoutTo>();
+                config.CreateMap<WorkoutTo, Workout>();
+
+                config.CreateMap<GoalTo, GoalDto>();
+                config.CreateMap<Goal, GoalTo>();
+
+                config.CreateMap<WorkoutExercise, WorkoutExerciseTo>();
+                config.CreateMap<WorkoutExerciseTo, WorkoutExercise>();
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

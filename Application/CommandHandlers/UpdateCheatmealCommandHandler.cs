@@ -11,27 +11,33 @@ namespace fitness_tracker_service.Application.CommandHandlers
 {
     public class UpdateCheatmealCommandHandler : IRequestHandler<UpdateCheatmealCommand, string>
     {
-        private IRepositoryWrapper _repository;
+        private readonly ICheatmealRepository _cheatRepository;
+        private readonly IWorkoutRepository _workoutRepository;
         private readonly IMapper _mapper;
 
-        public UpdateCheatmealCommandHandler(IRepositoryWrapper repository, IMapper mapper)
+        public UpdateCheatmealCommandHandler(ICheatmealRepository cheatRepository, IWorkoutRepository workoutRepository, IMapper mapper)
         {
-            _repository = repository;
+            _cheatRepository = cheatRepository;
+            _workoutRepository = workoutRepository;
             _mapper = mapper;
         }
 
         public async Task<string> Handle(UpdateCheatmealCommand request, CancellationToken cancellationToken)
         {
-            Workout workout = _repository.Workout.FindByCondition(x => x.workout_id.Equals(request.workout_id)).FirstOrDefault();
-            Cheatmeal cheatmeal = _repository.Cheatmeal.FindByCondition(x => x.cheat_id.Equals(request.cheat_id)).FirstOrDefault();
+            WorkoutTo workout = await _workoutRepository.getById(request.workout_id);
             if (workout != null)
             {
+                CheatmealTo cheatmeal = await _cheatRepository.getById(request.cheat_id);
                 if (cheatmeal != null)
                 {
                     try
                     {
-                        _repository.Cheatmeal.Update(_mapper.Map<Cheatmeal>(request));
-                        return await Task.FromResult("Cheatmeal has been successfully updated!");
+                        bool status= await _cheatRepository.modify(_mapper.Map<Cheatmeal>(request));
+                        if (status)
+                        {
+                            return await Task.FromResult("Cheatmeal has been successfully updated!");
+                        }
+                        else return await Task.FromResult("Update cheatmeal has been failled!");
                     }
                     catch (Exception ex)
                     {

@@ -7,5 +7,8 @@ namespace fitness_tracker_service.Domain.Repositories
 {
     public interface IWorkoutExerciseRepository : IRepositoryBase<WorkoutExercise>
     {
+        Task<bool> addAll(long workout_id, List<Exercise> exercises);
+        Task<bool> deleteAllByWorkoutId(List<WorkoutExercise> workoutExercises);
+        Task<List<WorkoutExerciseTo>> getAllByWorkoutId(long workoutId);
     }
 }

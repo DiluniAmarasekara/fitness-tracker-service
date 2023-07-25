@@ -12,10 +12,10 @@ namespace fitness_tracker_service.Application.QueryHandlers
 {
     public class GetAllCheatmealHandler : IRequestHandler<GetAllCheatmealQuery, List<CheatmealDto>>
     {
-        private readonly IRepositoryWrapper _repository;
+        private readonly ICheatmealRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetAllCheatmealHandler(IRepositoryWrapper repository, IMapper mapper)
+        public GetAllCheatmealHandler(ICheatmealRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -23,15 +23,8 @@ namespace fitness_tracker_service.Application.QueryHandlers
 
         public async Task<List<CheatmealDto>> Handle(GetAllCheatmealQuery request, CancellationToken cancellationToken)
         {
-            List<CheatmealDto> responses = new List<CheatmealDto>();
-            List<Cheatmeal> cheatmeals = _repository.Cheatmeal.FindAll().ToList();
-
-            cheatmeals.ForEach(cheatmeal =>
-            {
-                var response = _mapper.Map<CheatmealDto>(cheatmeal);
-                responses.Add(response);
-            });
-            return responses;
+            List<CheatmealTo> cheatmeals = await _repository.getAll();
+            return _mapper.Map<List<CheatmealDto>>(cheatmeals);
         }
     }
 }

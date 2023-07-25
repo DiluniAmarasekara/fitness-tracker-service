@@ -12,10 +12,10 @@ namespace fitness_tracker_service.Application.QueryHandlers
 {
     public class GetCheatmealByIdHandler : IRequestHandler<GetCheatmealByIdQuery, CheatmealDto>
     {
-        private readonly IRepositoryWrapper _repository;
+        private readonly ICheatmealRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetCheatmealByIdHandler(IRepositoryWrapper repository, IMapper mapper)
+        public GetCheatmealByIdHandler(ICheatmealRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -23,7 +23,7 @@ namespace fitness_tracker_service.Application.QueryHandlers
 
         public async Task<CheatmealDto> Handle(GetCheatmealByIdQuery request, CancellationToken cancellationToken)
         {
-            Cheatmeal cheatmeal = _repository.Cheatmeal.FindByCondition(x => x.cheat_id.Equals(request._cheatmealId)).FirstOrDefault();
+            CheatmealTo cheatmeal = await _repository.getById(request._cheatmealId);
             return _mapper.Map<CheatmealDto>(cheatmeal);
         }
     }

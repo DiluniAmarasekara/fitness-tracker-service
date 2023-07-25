@@ -7,5 +7,10 @@ namespace fitness_tracker_service.Domain.Repositories
 {
     public interface IWorkoutRepository : IRepositoryBase<Workout>
     {
+        Task<bool> add(Workout workout);
+        Task<bool> delete(Workout workout);
+        Task<List<WorkoutTo>> getAll();
+        Task<WorkoutTo> getById(long workout_id);
+        Task<bool> modify(Workout workout);
     }
 }

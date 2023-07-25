@@ -10,24 +10,30 @@ namespace fitness_tracker_service.Application.CommandHandlers
 {
     public class CreateCheatmealCommandHandler : IRequestHandler<CreateCheatmealCommand, string>
     {
-        private readonly IRepositoryWrapper _repository;
+        private readonly ICheatmealRepository _cheatRepository;
+        private readonly IWorkoutRepository _workoutRepository;
         private readonly IMapper _mapper;
 
-        public CreateCheatmealCommandHandler(IRepositoryWrapper repository, IMapper mapper)
+        public CreateCheatmealCommandHandler(ICheatmealRepository cheatRepository, IWorkoutRepository workoutRepository, IMapper mapper)
         {
-            _repository = repository;
+            _cheatRepository = cheatRepository;
+            _workoutRepository = workoutRepository;
             _mapper = mapper;
         }
 
         public async Task<string> Handle(CreateCheatmealCommand request, CancellationToken cancellationToken)
         {
-            Workout workout = _repository.Workout.FindByCondition(x => x.workout_id.Equals(request.workout_id)).FirstOrDefault();
+            WorkoutTo workout = await _workoutRepository.getById(request.workout_id);
             if (workout != null)
             {
                 try
                 {
-                    _repository.Cheatmeal.Create(_mapper.Map<Cheatmeal>(request));
-                    return await Task.FromResult("Cheatmeal has been successfully created!");
+                    bool status = await _cheatRepository.add(_mapper.Map<Cheatmeal>(request));
+                    if (status)
+                    {
+                        return await Task.FromResult("Cheatmeal has been successfully created!");
+                    }
+                    else return await Task.FromResult("Create cheatmeal has been failled!"); 
                 }
                 catch (Exception ex)
                 {

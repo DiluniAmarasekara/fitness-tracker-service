@@ -12,10 +12,10 @@ namespace fitness_tracker_service.Application.QueryHandlers
 {
     public class GetGoalByIdHandler : IRequestHandler<GetGoalByIdQuery, GoalDto>
     {
-        private readonly IRepositoryWrapper _repository;
+        private readonly IGoalRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetGoalByIdHandler(IRepositoryWrapper repository, IMapper mapper)
+        public GetGoalByIdHandler(IGoalRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -23,7 +23,7 @@ namespace fitness_tracker_service.Application.QueryHandlers
 
         public async Task<GoalDto> Handle(GetGoalByIdQuery request, CancellationToken cancellationToken)
         {
-            Goal goal = _repository.Goal.FindByCondition(x=>x.goal_id.Equals(request._goalId)).FirstOrDefault();
+            GoalTo goal = await _repository.getById(request._goalId);
             return _mapper.Map<GoalDto>(goal);
         }
     }

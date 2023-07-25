@@ -12,11 +12,11 @@ namespace fitness_tracker_service.Application.QueryHandlers
 {
     public class GetAllWorkoutsHandler : IRequestHandler<GetAllWorkoutsQuery, List<WorkoutDto>>
     {
-        private readonly IRepositoryWrapper _repository;
+        private readonly IWorkoutRepository _repository;
         private readonly IMapper _mapper;
 
 
-        public GetAllWorkoutsHandler(IRepositoryWrapper repository, IMapper mapper)
+        public GetAllWorkoutsHandler(IWorkoutRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -24,15 +24,8 @@ namespace fitness_tracker_service.Application.QueryHandlers
 
         public async Task<List<WorkoutDto>> Handle(GetAllWorkoutsQuery request, CancellationToken cancellationToken)
         {
-            List<WorkoutDto> responses = new List<WorkoutDto>();
-            List<Workout> workouts = _repository.Workout.FindAll().ToList();
-
-            workouts.ForEach(workout =>
-            {
-                var response = _mapper.Map<WorkoutDto>(workout);
-                responses.Add(response);
-            });
-            return responses;
+            List<WorkoutTo> workouts = await _repository.getAll();
+            return _mapper.Map<List<WorkoutDto>>(workouts);
         }
     }
 }

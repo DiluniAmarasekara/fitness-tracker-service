@@ -9,9 +9,9 @@ namespace fitness_tracker_service.Application.Queries
 {
     public class GetGoalByIdQuery : IRequest<GoalDto>
     {
-        public int _goalId { get; set; }
+        public long _goalId { get; set; }
 
-        public GetGoalByIdQuery(int goalId)
+        public GetGoalByIdQuery(long goalId)
         {
             _goalId = goalId;
         }

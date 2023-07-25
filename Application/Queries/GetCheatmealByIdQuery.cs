@@ -9,9 +9,9 @@ namespace fitness_tracker_service.Application.Queries
 {
     public class GetCheatmealByIdQuery : IRequest<CheatmealDto>
     {
-        public int _cheatmealId { get; set; }
+        public long _cheatmealId { get; set; }
 
-        public GetCheatmealByIdQuery(int cheatmealId)
+        public GetCheatmealByIdQuery(long cheatmealId)
         {
             _cheatmealId = cheatmealId;
         }

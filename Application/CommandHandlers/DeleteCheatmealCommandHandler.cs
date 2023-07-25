@@ -10,10 +10,10 @@ namespace fitness_tracker_service.Application.CommandHandlers
 {
     public class DeleteteCheatmealCommandHandler : IRequestHandler<DeleteCheatmealCommand, string>
     {
-        private readonly IRepositoryWrapper _repository;
+        private readonly ICheatmealRepository _repository;
         private readonly IMapper _mapper;
 
-        public DeleteteCheatmealCommandHandler(IRepositoryWrapper repository, IMapper mapper)
+        public DeleteteCheatmealCommandHandler(ICheatmealRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -21,13 +21,17 @@ namespace fitness_tracker_service.Application.CommandHandlers
 
         public async Task<string> Handle(DeleteCheatmealCommand request, CancellationToken cancellationToken)
         {
-            Cheatmeal cheatmeal = _repository.Cheatmeal.FindByCondition(x => x.cheat_id.Equals(request.cheat_id)).FirstOrDefault();
-            if (cheatmeal != null)
+            CheatmealTo cheatmeal = await _repository.getById(request.cheat_id);
+                if (cheatmeal != null)
             {
                 try
                 {
-                    _repository.Cheatmeal.Delete(cheatmeal);
-                    return await Task.FromResult("Cheatmeal has been successfully deleted!");
+                    bool status = await _repository.delete(_mapper.Map<Cheatmeal>(cheatmeal));
+                    if (status)
+                    {
+                        return await Task.FromResult("Cheatmeal has been successfully deleted!");
+                    }
+                    else return await Task.FromResult("Delete cheatmeal has been failled!");
                 }
                 catch (Exception ex)
                 {
