@@ -1,4 +1,4 @@
-﻿namespace fitness_tracker_service.Infrastructure.Persistence.Entities
+﻿namespace fitness_tracker_service.Domain.Models
 {
     public class ExerciseTo
     {

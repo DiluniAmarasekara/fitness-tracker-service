@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7aPtPnDZIFXICj2so1pNM4DV0nFBBV9kdmXh+8+eQ8Vu5Ju2QU55axQp+QyklVKpeCWOLuSH7ktJzzX2WUdc0A==",
+  "dgSpecHash": "6aM5e0AjVAqknoMD9iz6uYqaFF+U8Jwgd7FzWuhSpWg82mOHI8WJOHqrwdS+tGVSRx/3SAaySuvSLjsGCleMsg==",
   "success": true,
   "projectFilePath": "C:\\Users\\DELL\\OneDrive\\Documents\\MSc\\Enterprise\\cw2\\fitness-tracker-service\\fitness-tracker-service.csproj",
   "expectedPackageFiles": [
@@ -50,6 +50,7 @@
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.5.0\\swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using fitness_tracker_service.Application.Queries;
 using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Domain.Repositories.Impl;
 using MediatR;
 
-namespace fitness_tracker_service.Application.QueryHandlers
+namespace fitness_tracker_service.Application.Queries.Handlers
 {
     public class GetPredictionsQueryHandler : IRequestHandler<GetPredictionsQuery, List<double>>
     {

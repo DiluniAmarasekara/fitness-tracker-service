@@ -1,9 +1,9 @@
 ﻿using fitness_tracker_service.Domain.Repositories;
-using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
-using fitness_tracker_service.Infrastructure.Persistence.Repositories;
+using fitness_tracker_service.Infrastructure.Persistence.Contexts;
+using fitness_tracker_service.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace fitness_tracker_service.Infrastructure.Services
+namespace fitness_tracker_service.WebApi.Configs
 {
     public static class ServiceExtensions
     {

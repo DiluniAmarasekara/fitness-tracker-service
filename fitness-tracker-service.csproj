@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>fitness_tracker_service</RootNamespace>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <DocumentationFile>C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\WebApi\Controllers\ReportController.cs</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,13 +22,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Domain\Commands\" />
-    <Folder Include="Domain\Events\" />
-    <Folder Include="Domain\Queries\" />
-    <Folder Include="Infrastructure\Messaging\" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
   </ItemGroup>
 
 </Project>

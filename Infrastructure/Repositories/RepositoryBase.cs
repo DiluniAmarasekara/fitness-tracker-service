@@ -1,11 +1,9 @@
-﻿using fitness_tracker_service.Domain.Repositories;
-using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
-using fitness_tracker_service.Infrastructure.Persistence.Entities;
-using fitness_tracker_service.Infrastructure.Services;
+﻿using System.Linq.Expressions;
+using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
-namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
+namespace fitness_tracker_service.Infrastructure.Repositories
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {

@@ -2,9 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace fitness_tracker_service.WebApi
+namespace fitness_tracker_service.WebApi.Controllers
 {
-    [Route("api/Report")]
+    [Route("api/Prediction")]
     [ApiController]
     public class PredictionController : ControllerBase
     {

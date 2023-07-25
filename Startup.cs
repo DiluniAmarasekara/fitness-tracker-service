@@ -2,13 +2,14 @@ using MediatR;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
 using fitness_tracker_service.Domain.Repositories;
-using fitness_tracker_service.Infrastructure.Persistence.Repositories;
-using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
 using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
-using fitness_tracker_service.Infrastructure.Services;
 using fitness_tracker_service.Domain.Models;
+using fitness_tracker_service.Domain.Repositories.Impl;
+using fitness_tracker_service.Infrastructure.Persistence.Contexts;
+using fitness_tracker_service.Infrastructure.Repositories.Impl;
+using fitness_tracker_service.WebApi.Configs;
 
 namespace fitness_tracker_service
 {
@@ -74,7 +75,7 @@ namespace fitness_tracker_service
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fitness Tracker API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fitness Tracker API", Version = "v1", Description = "Your API description" });
             });
         }
 
@@ -86,7 +87,6 @@ namespace fitness_tracker_service
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
@@ -97,11 +97,11 @@ namespace fitness_tracker_service
                 c.RoutePrefix = string.Empty;
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

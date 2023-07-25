@@ -1,6 +1,7 @@
-﻿using fitness_tracker_service.Infrastructure.Persistence.Entities;
+﻿using fitness_tracker_service.Domain.Models;
+using fitness_tracker_service.Infrastructure.Persistence.Entities;
 
-namespace fitness_tracker_service.Domain.Repositories
+namespace fitness_tracker_service.Domain.Repositories.Impl
 {
     public interface ICheatmealRepository : IRepositoryBase<Cheatmeal>
     {

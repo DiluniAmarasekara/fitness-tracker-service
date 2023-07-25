@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using fitness_tracker_service.Domain.Models;
-using fitness_tracker_service.Domain.Repositories;
-using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
+using fitness_tracker_service.Domain.Repositories.Impl;
+using fitness_tracker_service.Infrastructure.Persistence.Contexts;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
 
-namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
+namespace fitness_tracker_service.Infrastructure.Repositories.Impl
 {
     public class WeightRepository : RepositoryBase<Weight>, IWeightRepository
     {

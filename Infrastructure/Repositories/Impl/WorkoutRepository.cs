@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using fitness_tracker_service.Application.Commands;
-using fitness_tracker_service.Domain.Repositories;
-using fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers;
+using fitness_tracker_service.Domain.Models;
+using fitness_tracker_service.Domain.Repositories.Impl;
+using fitness_tracker_service.Infrastructure.Persistence.Contexts;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace fitness_tracker_service.Infrastructure.Persistence.Repositories
+namespace fitness_tracker_service.Infrastructure.Repositories.Impl
 {
     public class WorkoutRepository : RepositoryBase<Workout>, IWorkoutRepository
     {

@@ -1,7 +1,7 @@
 ﻿using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace fitness_tracker_service.Infrastructure.Persistence.DatabaseHandlers
+namespace fitness_tracker_service.Infrastructure.Persistence.Contexts
 {
     public class RepositoryContext : DbContext
     {

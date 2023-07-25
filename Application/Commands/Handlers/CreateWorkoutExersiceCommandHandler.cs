@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
-using Azure;
-using fitness_tracker_service.Application.Commands;
-using fitness_tracker_service.Application.Dtos;
+using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Domain.Repositories.Impl;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
-using fitness_tracker_service.Infrastructure.Persistence.Repositories;
 using MediatR;
 
-namespace fitness_tracker_service.Application.CommandHandlers
+namespace fitness_tracker_service.Application.Commands.Handlers
 {
     public class CreateWorkoutExersiceCommandHandler : IRequestHandler<CreateWorkoutExerciseCommand, string>
     {
