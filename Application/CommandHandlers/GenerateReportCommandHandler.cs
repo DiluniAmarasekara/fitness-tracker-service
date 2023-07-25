@@ -34,30 +34,31 @@ namespace fitness_tracker_service.Application.CommandHandlers
             if (request.reportType.Equals(ReportType.Workout))
             {
                 List<WorkoutTo> workouts = await _workoutRepository.getAllByDateRange(request.from_date, request.to_date);
-                downloadPdfFile(ReportType.Exercise, workouts);
-                return ReportType.Workout + " Report is generated successfully! Please check reports folder.";
+                string filePath = downloadPdfFile(ReportType.Exercise, workouts);
+                return ReportType.Workout + " Report is generated successfully! Please check the report " + filePath;
             }
             else if (request.reportType.Equals(ReportType.CheatMeal))
             {
                 List<CheatmealTo> cheatmeals = await _cheatRepository.getAllByDateRange(request.from_date, request.to_date);
-                downloadPdfFile(ReportType.Exercise, cheatmeals);
-                return ReportType.CheatMeal + " Report is generated successfully! Please check reports folder.";
+                string filePath = downloadPdfFile(ReportType.Exercise, cheatmeals);
+                return ReportType.CheatMeal + " Report is generated successfully! Please check the report " + filePath;
             }
             else if (request.reportType.Equals(ReportType.Weight))
             {
                 List<WeightTo> weights = await _weightRepository.getAllByDateRange(request.from_date, request.to_date);
-                downloadPdfFile(ReportType.Exercise, weights);
-                return ReportType.Weight + " Report is generated successfully! Please check reports folder.";
+                string filePath = downloadPdfFile(ReportType.Exercise, weights);
+                return ReportType.Weight + " Report is generated successfully! Please check the report " + filePath;
             }
-            else {
+            else
+            {
                 List<ExerciseTo> exercises = await _exerciseRepository.getAll();
-                downloadPdfFile(ReportType.Exercise, exercises);
-                return ReportType.Exercise + " Report is generated successfully! Please check reports folder.";
+                string filePath = downloadPdfFile(ReportType.Exercise, exercises);
+                return ReportType.Exercise + " Report is generated successfully! Please check the report " + filePath;
             }
             return "Report generate is failed!";
-            
+
         }
-        public void downloadPdfFile<T>(ReportType reportType, List<T> dataList)
+        public string downloadPdfFile<T>(ReportType reportType, List<T> dataList)
         {
             // Create a new PDF document
             Document document = new Document();
@@ -88,16 +89,18 @@ namespace fitness_tracker_service.Application.CommandHandlers
             document.Add(table);
             // Close the PDF document
             document.Close();
+            return filePath;
         }
 
         private string setThePath(ReportType reportType)
         {
             // Assuming the relative path to the "reports" folder
             string relativeReportsFolder = "reports";
-            string fileName = reportType.ToString() + "_" + DateTime.Now + ".pdf";
+            string fileName = reportType.ToString() + "_" + DateTime.Now.ToString("M-d-yyyy h-mm-ss tt") + ".pdf";
 
             // Get the base directory of the application domain
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            Console.WriteLine("*************Your baseDirectory is : " + baseDirectory);
 
             // Combine the base directory with the relative path to the "reports" folder
             string reportsFolderPath = Path.Combine(baseDirectory, relativeReportsFolder);
