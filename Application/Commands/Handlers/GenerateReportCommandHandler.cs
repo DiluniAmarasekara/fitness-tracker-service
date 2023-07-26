@@ -30,19 +30,19 @@ namespace fitness_tracker_service.Application.Commands.Handlers
             if (request.reportType.Equals(ReportType.Workout))
             {
                 List<WorkoutTo> workouts = await _workoutRepository.getAllByDateRange(request.from_date, request.to_date);
-                string filePath = downloadPdfFile(ReportType.Exercise, workouts);
+                string filePath = downloadPdfFile(ReportType.Workout, workouts);
                 return ReportType.Workout + " Report is generated successfully! Please check the report " + filePath;
             }
             else if (request.reportType.Equals(ReportType.CheatMeal))
             {
                 List<CheatmealTo> cheatmeals = await _cheatRepository.getAllByDateRange(request.from_date, request.to_date);
-                string filePath = downloadPdfFile(ReportType.Exercise, cheatmeals);
+                string filePath = downloadPdfFile(ReportType.CheatMeal, cheatmeals);
                 return ReportType.CheatMeal + " Report is generated successfully! Please check the report " + filePath;
             }
             else if (request.reportType.Equals(ReportType.Weight))
             {
                 List<WeightTo> weights = await _weightRepository.getAllByDateRange(request.from_date, request.to_date);
-                string filePath = downloadPdfFile(ReportType.Exercise, weights);
+                string filePath = downloadPdfFile(ReportType.Weight, weights);
                 return ReportType.Weight + " Report is generated successfully! Please check the report " + filePath;
             }
             else

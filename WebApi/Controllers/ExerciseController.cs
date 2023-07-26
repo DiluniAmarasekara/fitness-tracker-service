@@ -25,7 +25,7 @@ namespace fitness_tracker_service.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{workoutId}", Name = "GetExerciseByWorkoutId")]
+        [HttpGet("Workout/{workoutId}", Name = "GetExerciseByWorkoutId")]
         public async Task<IActionResult> Get(int workoutId)
         {
             var result = await _mediator.Send(new GetExercisesByWorkoutIdQuery(workoutId));
@@ -36,7 +36,7 @@ namespace fitness_tracker_service.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost("{workoutId}", Name = "AddExercisesForWorkout")]
+        [HttpPost("Workout/{workoutId}", Name = "AddExercisesForWorkout")]
         public async Task<IActionResult> Post([FromBody] CreateWorkoutExerciseCommand workoutExercise)
         {
             var result = await _mediator.Send(workoutExercise);

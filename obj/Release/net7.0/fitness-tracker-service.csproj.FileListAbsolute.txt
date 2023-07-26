@@ -77,3 +77,6 @@ C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\fitness-tracker-service.pdb
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\fitness-tracker-service.genruntimeconfig.cache
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\ref\fitness-tracker-service.dll
+C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\bin\Release\net7.0\BouncyCastle.Crypto.dll
+C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\bin\Release\net7.0\itextsharp.dll
+C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\bin\Release\net7.0\Swashbuckle.AspNetCore.Annotations.dll

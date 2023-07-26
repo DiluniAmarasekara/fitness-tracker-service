@@ -8,6 +8,8 @@ C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Azure.Core.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Azure.Identity.dll
+C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\BouncyCastle.Crypto.dll
+C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\itextsharp.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\MediatR.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\MediatR.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
@@ -27,6 +29,7 @@ C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Microsoft.SqlServer.Server.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Swashbuckle.AspNetCore.Annotations.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\DELL\OneDrive\Documents\MSc\Enterprise\cw2\fitness-tracker-service\obj\Release\net7.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

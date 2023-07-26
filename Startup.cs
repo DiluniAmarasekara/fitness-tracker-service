@@ -1,15 +1,16 @@
 using MediatR;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
-using fitness_tracker_service.Domain.Repositories;
 using fitness_tracker_service.Application.Dtos;
 using fitness_tracker_service.Application.Commands;
 using fitness_tracker_service.Infrastructure.Persistence.Entities;
 using fitness_tracker_service.Domain.Models;
 using fitness_tracker_service.Domain.Repositories.Impl;
-using fitness_tracker_service.Infrastructure.Persistence.Contexts;
 using fitness_tracker_service.Infrastructure.Repositories.Impl;
-using fitness_tracker_service.WebApi.Configs;
+using fitness_tracker_service.Infrastructure.Persistence.Contexts;
+using fitness_tracker_service.Domain.Repositories;
+using fitness_tracker_service.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace fitness_tracker_service
 {
@@ -25,9 +26,8 @@ namespace fitness_tracker_service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.ConfigureSqlServerContext(Configuration);
-            services.ConfigureRepositoryWrapper();
+            var connectionString = Configuration["ConnectionStrings:FitnessCon"];
+            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
 
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
             services.AddScoped<IGoalRepository, GoalRepository>();
@@ -35,6 +35,8 @@ namespace fitness_tracker_service
             services.AddScoped<ICheatmealRepository, CheatmealRepository>();
             services.AddScoped<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
             services.AddScoped<IWeightRepository, WeightRepository>();
+
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
             services.AddScoped<RepositoryContext>();
 
@@ -69,13 +71,14 @@ namespace fitness_tracker_service
                 config.CreateMap<WorkoutExerciseTo, WorkoutExercise>();
 
                 config.CreateMap<WeightTo, Weight>();
+                config.CreateMap<Weight, WeightTo>();
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fitness Tracker API", Version = "v1", Description = "Your API description" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fitness Tracker API", Version = "v1", Description = "" });
             });
         }
 
